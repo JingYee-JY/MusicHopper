@@ -1,0 +1,145 @@
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+div{
+    padding: 2px;
+    font-size: 7vmax;
+    text-align: center;
+    font-weight: 600;
+}
+button{
+    position:inherit;
+    bottom: 10vh;
+    width: 30vmin;
+    background-color: #D4D4D4;
+    color: #1B2B65;
+    font-size: large;
+    border-radius: 2em;
+    border: 2px solid #1B2B65;
+    height: 15vmin;
+    cursor: pointer;
+}
+.startContainer,
+.game,
+.selection{
+    margin: 0;
+    position: absolute;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    background-image: url("./img/Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.disc,
+.disc1{
+    position: absolute;
+    width: 40vh;
+    height: 40vh;
+    top: 30vh;
+    background-image: url("./img/Music\ Disc.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation: spin 5s linear infinite;
+}
+.disc1{
+    top: 0vh;
+}
+
+@keyframes spin{
+    100%{
+        transform: rotate(360deg)
+    }
+}
+.move{
+    display: flex;
+    position: absolute;
+    top: 65vh;
+    width: 10vh;
+    width: 10vh;
+    animation: spin 5s linear infinite;
+}
+.needle,
+.needle1{
+    position: absolute;
+    width: 12vh;
+    height: 25vh;
+    top: 13.5vh;
+    transform: rotate(35deg);
+}
+.needle1{
+    background-image: url("./img/Needle.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(38deg);
+}
+.show{
+    position: absolute;
+    width: 15vh;
+    height: 25vh;
+    top: 13.5vh;
+    transform: rotate(-138deg);
+}
+.hide{
+    display: none;
+}
+p{
+    height: 10vh;
+    width: 5vh;
+}
+.song1,
+.song2,
+.song3{
+    position:inherit;
+    width: 70vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: right;
+    background-color: #D4D4D4;
+    color: #1B2B65;
+    font-size: large;
+    border-radius: 2em;
+    border: 2px solid #1B2B65;
+    height: 20vmin;
+}
+.song1{
+    top: 18vh;
+}
+.song2{
+    top: 45vh;
+}
+.song3{
+    top: 73vh
+}
+.difficulty{
+    height: 10vmin;
+}
+.container{
+    display: flex;
+    top: 45vh;
+    width: 40vh;
+    height: 40vh;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+}
+.sign{
+    position: relative;
+    height: 26vh;
+    width: 20vh;
+    background-image: url("./img/Music Note.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 2.5vh;
+}
