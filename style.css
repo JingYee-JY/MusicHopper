@@ -134,8 +134,7 @@ div{
 .move{
     display: flex;
     position: absolute;
-    top: 65vh;
-    width: 10vh;
+    top: 150vh;
     width: 10vh;
     animation: spin 5s linear infinite;
 }
@@ -199,20 +198,19 @@ div{
     display: flex;
     top: 45vh;
     width: 40vh;
-    height: 40vh;
+    height: 20vh;
     position: absolute;
     justify-content: center;
     align-items: center;
 }
 .sign{
     position: relative;
-    height: 25%;
+    height: 50%;
     width: 20vh;
     background-image: url("./img/Music Note.png");
     background-size: contain;
     background-repeat: no-repeat;
-    left: 7.1vh;
-    top: -10vh;
+    left: 7.2vh;
 }
 .pic{
     margin-top: 50px;

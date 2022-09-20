@@ -18,6 +18,7 @@ let angle
 let border
 let next
 let repeat
+let moving;
 
 let player = {step: 2}
 
@@ -107,7 +108,7 @@ function handleInput(){
             angle = Math.round(Math.asin(values[1]) * (180/Math.PI));
             
             if(angle < 45 && angle > -90 ){
-                jump = true
+                jump = moving = true
                 move.style.animationPlayState = "paused";
                 console.log(next)
             }
@@ -115,20 +116,35 @@ function handleInput(){
         }
         if(jump == true){
             let nextContainer = document.querySelector(`.c${next}`)
-            console.log(move.x - 100,move.x + 100)
-            console.log(move.y - 200,move.y - 100)
-            if(nextContainer.x >= (move.x - 100) && nextContainer.x < (move.x + 100)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y - 100)){
+            if(nextContainer.x >= (move.x - 300) && nextContainer.x < (move.x)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y) && moving == true){
                 console.log("stop")
                 let signRemove = document.querySelector(`.c${next - 1} .sign`)
                 move.style.animationPlayState = "running";
-                move.style.right = nextContainer.x + 100  + 'px';
-                move.style.top = nextContainer.y + 68  + 'px';
-                cancelAnimationFrame(repeat)
+                move.x = nextContainer.x + 100
+                move.y = nextContainer.y + 68
+                move.style.right = move.x  + 'px';
+                move.style.top = move.y + 'px';
                 signRemove.classList.add("hide")
-                jump = false
-                console.log(next)
-                next += 1
-                checkEnd()
+                moving = false
+                let delay = setTimeout(() => {
+                    cancelAnimationFrame(repeat)
+                    next += 1
+                    jump = false
+                    checkEnd()
+                    console.log(next)
+                    return
+                  }, 1000);
+            }
+            if(moving == false){
+                let allContainer = document.querySelectorAll(".container")
+            
+                allContainer.forEach(function(item){
+                    item.y = item.y + player.step;
+                    item.style.top = item.y +"px";
+                })
+                move.y = move.y+ player.step;
+                move.style.top = move.y +"px";
+                repeat = window.requestAnimationFrame(handleInput);
                 return
             }
             if(nextContainer.y > (border.height - 200)){
