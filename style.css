@@ -251,8 +251,9 @@ body{
         margin-top: 32px;
         margin-right: 49px;
     }
-    .startButton,.easy, .normal, .hard{
+    .startButton,.easy, .normal, .hard, .playAgain,.home{
         max-width: 400px;
+        padding: 3.5%;
     }
     .words{
         font-size: 30px;
@@ -263,7 +264,8 @@ body{
     .choice p{
         font-size: 35px;
     }
-    .needle{
+    .text p{
+        font-size: 50px;
     }
 }
 
@@ -274,6 +276,6 @@ body{
         display: flex;
     }
     .startContainer,.selection, .game,.final{
-        max-width: 375px;
+        max-width: 400px;
     }
 }

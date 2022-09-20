@@ -20,6 +20,11 @@ let next
 let repeat
 let moving;
 
+let distance
+let needleX
+let needleY
+let moveContainerX
+
 let player = {step: 2}
 
 startButton.addEventListener("click", () => {
@@ -71,12 +76,28 @@ function spawnDisc() {
             let newContainer = document.createElement("div");
             newContainer.classList.add("container");
             newContainer.classList.add(`c${i}`);
-            newContainer.y = Math.floor((border.height / 4 + border.height /2) - (250 * i));
-            newContainer.x = Math.floor(Math.random() * (border.width - 150))
+            if(border.width > 500){
+                distance = 400
+                moveContainerX = 100
+            }
+            else{
+                distance = 250
+                moveContainerX = 0
+            }
+            newContainer.y = Math.floor((border.height / 4 + border.height /2) - (distance * i));
+            newContainer.x = Math.floor(Math.random() * ((border.width - 150) - moveContainerX))
             if(i == 0){
                 newContainer.x = Math.floor(border.width / 2 - 150)
-                move.x = newContainer.x + 100
-                move.y = newContainer.y + 68
+                if(border.width > 500){
+                    needleX = 130
+                    needleY = 80
+                }
+                else{
+                    needleX = 100
+                    needleY = 68
+                }
+                move.x = newContainer.x + needleX
+                move.y = newContainer.y + needleY
                 move.style.right = move.x  + 'px';
                 move.style.top = move.y  + 'px';
                 console.log(newContainer.x, newContainer.y)
@@ -116,15 +137,13 @@ function handleInput(){
         }
         if(jump == true){
             let nextContainer = document.querySelector(`.c${next}`)
-            if(nextContainer.x >= (move.x - 300) && nextContainer.x < (move.x)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y) && moving == true){
+            if(nextContainer.x >= (move.x - 300) && nextContainer.x < (move.x + 100)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y) && moving == true){
                 console.log("stop")
-                let signRemove = document.querySelector(`.c${next - 1} .sign`)
                 move.style.animationPlayState = "running";
-                move.x = nextContainer.x + 100
-                move.y = nextContainer.y + 68
+                move.x = nextContainer.x + needleX
+                move.y = nextContainer.y + needleY
                 move.style.right = move.x  + 'px';
                 move.style.top = move.y + 'px';
-                signRemove.classList.add("hide")
                 moving = false
                 let delay = setTimeout(() => {
                     cancelAnimationFrame(repeat)
