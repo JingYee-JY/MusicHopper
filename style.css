@@ -9,6 +9,10 @@ body{
     background-color: #EDD5A5;
 }
 
+*{
+    font-family: 'Lilita One', cursive;
+}
+
 .startButton, .startGame, .easy,.normal, .playAgain,.hard, .home{
     width: 100%;
     position: relative;
@@ -21,6 +25,7 @@ body{
     text-decoration: none;
     border-radius: 10px;
     padding: 5% 5%;
+    margin-top: 15px;
     margin-bottom: 15px;
     color: white;
     font-size: 25px;
@@ -58,10 +63,6 @@ body{
 .startButton p, .startGame p, .submit p, .easy p, .normal p, .hard p {
     margin: 3%;
     margin-right: 6%;
-}
-
-.startButton{
-    margin-top: 300px;
 }
 
 .startContainer,
@@ -133,15 +134,9 @@ body{
     width: 10vh;
     animation: spin 5s linear infinite;
 }
-.needle,
-.needle1{
+
+.needle{
     position: absolute;
-    width: 40%;
-    height: auto;
-    top: 6.5vh;
-    transform: rotate(35deg);
-}
-.needle1{
     width: 40%;
     height: 20vh;
     top: 6.5vh;
@@ -151,11 +146,8 @@ body{
     transform: rotate(38deg);
 }
 .show{
-    position: absolute;
-    width: 20%;
+    width: 70%;
     height: auto;
-    top: 17.5vh;
-    transform: rotate(-138deg);
 }
 .hide{
     display: none;
@@ -207,13 +199,21 @@ body{
     background-repeat: no-repeat;
     left: 7.2vh;
 }
+.text{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .pic{
     margin-top: 50px;
-    width: 50%;
+    margin-bottom: 20px;
+    width: 30%;
 }
 .text p{
     margin: 0;
+    text-align: center;
     width: 100%;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 .home{
@@ -232,6 +232,38 @@ body{
         padding: 3%;
         justify-content: center;
         align-items: center;
+    }
+}
+
+  /*ipad*/
+  @media screen and (min-width: 768px) and (max-width: 1199px){
+     body{
+        width: 100%;
+        display: flex;
+    }
+    .show{
+        width: 60%;
+    }
+    .startContainer,.selection, .game,.final{
+        max-width: 800px;
+    }
+    .move{
+        margin-top: 32px;
+        margin-right: 49px;
+    }
+    .startButton,.easy, .normal, .hard{
+        max-width: 400px;
+    }
+    .words{
+        font-size: 30px;
+    }
+    .arrowHead{
+        max-width: 25px;
+    }
+    .choice p{
+        font-size: 35px;
+    }
+    .needle{
     }
 }
 
