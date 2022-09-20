@@ -6,9 +6,20 @@ const song1 = document.querySelector(".song1")
 const song2 = document.querySelector(".song2")
 const song3 = document.querySelector(".song3")
 const move = document.querySelector(".move")
+const final = document.querySelector(".final")
+const text = document.querySelector(".text")
+const playAgain = document.querySelector(".playAgain")
+const home = document.querySelector(".home")
 
 let song;
 let startGame;
+let jump
+let angle
+let border
+let next
+let repeat
+
+let player = {step: 2}
 
 startButton.addEventListener("click", () => {
     start.classList.add("hide") 
@@ -18,31 +29,61 @@ startButton.addEventListener("click", () => {
 song1.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
-    song = 1;
-    startGame = true
-    spawnDisc()
+    song = 4;
+    began()
 })
 song2.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
-    startGame = true
-    song = 2;
+    song = 6;
+    began()
 })
 song3.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
-    startGame = true
-    song = 3;
+    song = 8;
+    began()
+})
+playAgain.addEventListener("click", () => {
+    final.classList.add("hide")
+    game.classList.remove("hide")
+    remove()
+    began()
+})
+home.addEventListener("click", () => {
+    final.classList.add("hide")
+    selection.classList.remove("hide")
+    remove()
 })
 
+function began(){
+    startGame = true
+    jump = false
+    next = 1;
+    move.style.animationPlayState = "running";
+    spawnDisc()
+}
+
 function spawnDisc() {
-    if(song == 1){
-        for(let i = 0; i < 6; i++){
+        for(let i = 0; i < song; i++){
+            border = game.getBoundingClientRect();
             let newContainer = document.createElement("div");
             newContainer.classList.add("container");
-            newContainer.y = 45 - (100 * (i + 1));
+            newContainer.classList.add(`c${i}`);
+            newContainer.y = Math.floor((border.height / 4 + border.height /2) - (250 * i));
+            newContainer.x = Math.floor(Math.random() * (border.width - 150))
+            if(i == 0){
+                newContainer.x = Math.floor(border.width / 2 - 150)
+                move.x = newContainer.x + 100
+                move.y = newContainer.y + 68
+                move.style.right = move.x  + 'px';
+                move.style.top = move.y  + 'px';
+                console.log(newContainer.x, newContainer.y)
+                console.log(move.x, move.y)
+
+            }
             newContainer.style.top = newContainer.y + "px";
-            newContainer.style.right = Math.floor(Math.random() * 800) + 'px';
+            newContainer.style.right = newContainer.x  + 'px';
             game.appendChild(newContainer)
             let newDisc = document.createElement("div");
             newDisc.classList.add("disc1");
@@ -50,14 +91,112 @@ function spawnDisc() {
             let newSign = document.createElement("div");
             newSign.classList.add("sign");
             newContainer.appendChild(newSign)
-            console.log(newContainer)
         }
-    }
 }
 
 function handleInput(){
     if(startGame == true){
-        move.style.animationPlayState = "paused";
-        console.log("jump")
+        if(jump == false){
+            let style = window.getComputedStyle(move, null);
+            let rotation = style.getPropertyValue("transform")
+
+            var values = rotation.split('(')[1],
+            values = values.split(')')[0],
+            values = values.split(',');
+
+            angle = Math.round(Math.asin(values[1]) * (180/Math.PI));
+            
+            if(angle < 45 && angle > -90 ){
+                jump = true
+                move.style.animationPlayState = "paused";
+                console.log(next)
+            }
+            console.log(angle)
+        }
+        if(jump == true){
+            let nextContainer = document.querySelector(`.c${next}`)
+            console.log(move.x - 100,move.x + 100)
+            console.log(move.y - 200,move.y - 100)
+            if(nextContainer.x >= (move.x - 100) && nextContainer.x < (move.x + 100)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y - 100)){
+                console.log("stop")
+                let signRemove = document.querySelector(`.c${next - 1} .sign`)
+                move.style.animationPlayState = "running";
+                move.style.right = nextContainer.x + 100  + 'px';
+                move.style.top = nextContainer.y + 68  + 'px';
+                cancelAnimationFrame(repeat)
+                signRemove.classList.add("hide")
+                jump = false
+                console.log(next)
+                next += 1
+                checkEnd()
+                return
+            }
+            if(nextContainer.y > (border.height - 200)){
+                console.log("stop")
+                game.classList.add("hide")
+                final.classList.remove("hide")
+                text.innerHTML = `
+                <img class="pic" src="./img/niceTry.png">
+                <p>Nice Try!</p>`
+                cancelAnimationFrame(repeat)
+                jump = false
+                startGame = false
+                return
+            }
+            if(angle < 1 && angle > -45){
+                let allContainer = document.querySelectorAll(".container")
+            
+                allContainer.forEach(function(item){
+                    item.y = item.y + player.step;
+                    item.style.top = item.y +"px";
+                })
+                repeat = window.requestAnimationFrame(handleInput);
+            }
+            if(angle > -1 && angle < 45){
+                let allContainer = document.querySelectorAll(".container")
+            
+                allContainer.forEach(function(item){
+                    item.y = item.y + player.step;
+                    item.x = item.x - player.step;
+                    item.style.top = item.y +"px";
+                    item.style.right = item.x +"px";
+                })
+                repeat = window.requestAnimationFrame(handleInput);
+            }
+            if(angle < -45 && angle > -90){
+                let allContainer = document.querySelectorAll(".container")
+            
+                allContainer.forEach(function(item){
+                    item.y = item.y + player.step;
+                    item.x = item.x + player.step;
+                    item.style.top = item.y +"px";
+                    item.style.right = item.x +"px";
+                })
+                repeat = window.requestAnimationFrame(handleInput);
+            }
+        }
     }
+}
+
+function checkEnd(){
+    if(next == song){
+        let delay = setTimeout(() => {
+            game.classList.add("hide")
+            final.classList.remove("hide")
+            text.innerHTML = `
+            <img class="pic" src="./img/wellDone.png">
+            <p>Well Done!</p>`
+            jump = false
+            startGame = false
+            return
+          }, 500);
+    }
+}
+function remove(){
+    let container = document.querySelectorAll(".container");
+    
+    console.log(container)
+    container.forEach(function(item){
+        game.removeChild(item);
+    })
 }

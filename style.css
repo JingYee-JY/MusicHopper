@@ -6,8 +6,6 @@ body{
     position: fixed;
     justify-content: center;
     align-items: center;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 div{
     padding: 2px;
@@ -29,17 +27,28 @@ button{
 }
 .startContainer,
 .game,
-.selection{
+.selection,
+.final{
     margin: 0;
-    position: absolute;
     padding: 0;
     display: flex;
     width: 100%;
+    flex-direction: column;
     height: 100%;
+    align-items: center;
     justify-content: center;
     background-image: url("./img/Background.png");
     background-size: cover;
     background-repeat: no-repeat;
+}
+.startContainer{
+    justify-content: unset;
+    position: absolute;
+}
+.final{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .disc,
 .disc1{
@@ -54,6 +63,8 @@ button{
 }
 .disc1{
     top: 0vh;
+    width: 20vh;
+    height: 20vh;
 }
 
 @keyframes spin{
@@ -78,6 +89,9 @@ button{
     transform: rotate(35deg);
 }
 .needle1{
+    width: 40%;
+    height: 20vh;
+    top: 6.5vh;
     background-image: url("./img/Needle.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -109,6 +123,7 @@ p{
     background-color: #D4D4D4;
     color: #1B2B65;
     font-size: large;
+    margin: 20px auto;
     border-radius: 2em;
     border: 2px solid #1B2B65;
     height: 20vmin;
@@ -136,10 +151,22 @@ p{
 }
 .sign{
     position: relative;
-    height: 26vh;
+    height: 25%;
     width: 20vh;
     background-image: url("./img/Music Note.png");
     background-size: contain;
     background-repeat: no-repeat;
-    left: 2.5vh;
+    left: 7.1vh;
+    top: -10vh;
+}
+.pic{
+    margin-top: 50px;
+    width: 50%;
+}
+.text p{
+    margin: 0;
+    width: 100%;
+}
+.home{
+    margin: 20px auto;
 }
