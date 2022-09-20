@@ -9,28 +9,31 @@
 </head>
 <body ontouchend ="handleInput()">
     <div class="startContainer">
-        <div>Music Hopper</div>
+        <div class="game-title">
+            <img class="title" src="./img/title.png">
+        </div>
         <img class="show" src="./img/Needle.png">
         <img class="disc" src="./img/Music Disc.png">
-        <button class="start">START</button>
+        <button class="startButton">
+            <p class="words"><img src="./img/arrow.png" class="arrowHead"> START GAME</p>
+        </button>
     </div>
     <div class="selection hide">
-        <div>Songs</div>
-        <button class="song1">
-            <img class="difficulty" src="./img/Music Note.png">
-            <p></p> 
-            Call me Maybe</button>
-        <button class="song2">
-            <img class="difficulty" src="./img/Music Note.png">
-            <img class="difficulty" src="./img/Music Note.png">
-            <p></p>
-            Hello</button>
-        <button class="song3">
-            <img class="difficulty" src="./img/Music Note.png">
-            <img class="difficulty" src="./img/Music Note.png">
-            <img class="difficulty" src="./img/Music Note.png">
-            <p></p>
-             Attention</button>
+        <div class="game-title">
+            <img class="title" src="./img/title.png">
+        </div>
+        <div class="choice">
+            <p>Select Difficulty</p>
+            <button class="easy">
+                <p class="words">Easy</p>
+            </button>
+            <button class="normal">
+                <p class="words">Normal</p>
+            </button>
+            <button class="hard">
+                    <p class="words">Hard</p>
+            </button>
+        </div>
     </div>
     <div class="game hide">
         
@@ -41,8 +44,12 @@
     <div class="final hide">
         <div>Music Hopper</div>
         <div class="text"></div>
-        <button class="playAgain">Play again</button>
-        <button class="home">Back to home</button>
+        <button class="playAgain">
+            <p class="words"><img src="./img/again.png" class="arrowHead">Play again</p>
+            </button>
+        <button class="home">
+            <p class="words"><img src="./img/home.png" class="arrowHead">Back to home</p>
+        </button>
     </div>
     <script src="./script.js"></script>
 </body>

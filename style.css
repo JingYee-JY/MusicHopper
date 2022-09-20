@@ -6,6 +6,7 @@ body{
     position: fixed;
     justify-content: center;
     align-items: center;
+    background-color: #EDD5A5;
 }
 div{
     padding: 2px;
@@ -13,18 +14,62 @@ div{
     text-align: center;
     font-weight: 600;
 }
-button{
-    position:inherit;
-    bottom: 10vh;
-    width: 30vmin;
-    background-color: #D4D4D4;
-    color: #1B2B65;
-    font-size: large;
-    border-radius: 2em;
-    border: 2px solid #1B2B65;
-    height: 15vmin;
-    cursor: pointer;
+
+.startButton, .startGame, .easy,.normal, .playAgain,.hard, .home{
+    width: 100%;
+    position: relative;
+    align-self: center;
+    background-color: #F46255;
+    box-shadow: 0px 8px #94362E;
+    border: 0px;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5% 5%;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 25px;
 }
+
+.home{
+    background-color: #94362E;
+    box-shadow: 0px 8px #F46255;
+}
+
+.words{
+    font-size: 20px;
+    width: 100%;
+    margin: 0 !important;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-weight: 500;
+}
+
+.arrowHead{
+    margin-right: 10px;
+    max-width: 15px;
+    height: auto;
+}
+
+.choice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding: 2.5%;
+}
+
+.startButton p, .startGame p, .submit p, .easy p, .normal p, .hard p {
+    margin: 3%;
+    margin-right: 6%;
+}
+
+.startButton{
+    margin-top: 300px;
+}
+
 .startContainer,
 .game,
 .selection,
@@ -37,25 +82,39 @@ button{
     height: 100%;
     align-items: center;
     justify-content: center;
-    background-image: url("./img/Background.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
 .startContainer{
     justify-content: unset;
     position: absolute;
+    background-image: url("./img/Background.png");
+    background-size: contain;
+    background-position: bottom;
 }
 .final{
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.game-title{
+    margin-top: 10px;
+    align-self: center;
+    width: 80%;
+}
+
+.title{
+    width: 50%;
+    box-sizing: content-box;
+}
+
 .disc,
 .disc1{
     position: absolute;
-    width: 40vh;
-    height: 40vh;
-    top: 30vh;
+    width: 50%;
+    height: auto;
+    top: 35vh;
     background-image: url("./img/Music\ Disc.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -83,9 +142,9 @@ button{
 .needle,
 .needle1{
     position: absolute;
-    width: 12vh;
-    height: 25vh;
-    top: 13.5vh;
+    width: 40%;
+    height: auto;
+    top: 6.5vh;
     transform: rotate(35deg);
 }
 .needle1{
@@ -99,17 +158,13 @@ button{
 }
 .show{
     position: absolute;
-    width: 15vh;
-    height: 25vh;
-    top: 13.5vh;
+    width: 20%;
+    height: auto;
+    top: 17.5vh;
     transform: rotate(-138deg);
 }
 .hide{
     display: none;
-}
-p{
-    height: 10vh;
-    width: 5vh;
 }
 .song1,
 .song2,
@@ -166,7 +221,23 @@ p{
 .text p{
     margin: 0;
     width: 100%;
+    margin-bottom: 20px;
 }
 .home{
     margin: 20px auto;
+}
+
+  /*mobile*/
+  @media screen and (max-width: 767px){
+    .startButton, .startGame, .playAgain, .home, .easy, .normal, .hard {
+    width: calc(100% - 70px);
+    justify-content: center;
+    align-items: center;
+    }
+    .next, .readyButton{
+        width: calc(100% - 100px);
+        padding: 3%;
+        justify-content: center;
+        align-items: center;
+    }
 }

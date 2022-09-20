@@ -1,10 +1,10 @@
-const startButton = document.querySelector(".start");
+const startButton = document.querySelector(".startButton");
 const start = document.querySelector(".startContainer")
 const game = document.querySelector(".game")
 const selection = document.querySelector(".selection")
-const song1 = document.querySelector(".song1")
-const song2 = document.querySelector(".song2")
-const song3 = document.querySelector(".song3")
+const easy = document.querySelector(".easy")
+const normal = document.querySelector(".normal")
+const hard = document.querySelector(".hard")
 const move = document.querySelector(".move")
 const final = document.querySelector(".final")
 const text = document.querySelector(".text")
@@ -26,19 +26,19 @@ startButton.addEventListener("click", () => {
     selection.classList.remove("hide") 
 })
 
-song1.addEventListener("click", () => {
+easy.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
     song = 4;
     began()
 })
-song2.addEventListener("click", () => {
+normal.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
     song = 6;
     began()
 })
-song3.addEventListener("click", () => {
+hard.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
     song = 8;
@@ -52,7 +52,7 @@ playAgain.addEventListener("click", () => {
 })
 home.addEventListener("click", () => {
     final.classList.add("hide")
-    selection.classList.remove("hide")
+    start.classList.remove("hide")
     remove()
 })
 
