@@ -75,6 +75,7 @@ body{
     width: 100%;
     flex-direction: column;
     height: 100%;
+    position: relative;
     align-items: center;
     justify-content: center;
     background-size: cover;
@@ -108,7 +109,7 @@ body{
 .disc,
 .disc1{
     position: absolute;
-    max-width: 50%;
+    max-width: 40vh;
     height: auto;
     top: 35vh;
     background-image: url("./img/Music\ Disc.png");
@@ -123,6 +124,9 @@ body{
 }
 
 @keyframes spin{
+    0%{
+        transform: rotate(0);
+    }
     100%{
         transform: rotate(360deg)
     }
@@ -130,7 +134,6 @@ body{
 .move{
     display: flex;
     position: absolute;
-    top: 150vh;
     width: 10vh;
     animation: spin 5s linear infinite;
 }
@@ -184,7 +187,7 @@ body{
 .container{
     display: flex;
     top: 45vh;
-    width: 40vh;
+    width: 20vh;
     height: 20vh;
     position: absolute;
     justify-content: center;
@@ -222,6 +225,14 @@ body{
 
   /*mobile*/
   @media screen and (max-width: 767px){
+    body{
+        width: 100%;
+        display: flex;
+    }
+    .startContainer,.selection, .game,.final{
+        max-width: 375px;
+        max-height: 667px;
+    }
     .startButton, .startGame, .playAgain, .home, .easy, .normal, .hard {
     width: calc(100% - 70px);
     justify-content: center;
@@ -232,6 +243,10 @@ body{
         padding: 3%;
         justify-content: center;
         align-items: center;
+    }
+    .disc,.container{
+        max-width: 135;
+        max-height: 135;
     }
 }
 
@@ -244,12 +259,16 @@ body{
     .show{
         width: 60%;
     }
+    .needle{
+        margin-left: 20px;
+    }
     .startContainer,.selection, .game,.final{
-        max-width: 800px;
+        max-width: 700px;
+        max-height: 1020px;
     }
     .move{
         margin-top: 32px;
-        margin-right: 49px;
+        margin-right: 150px;
     }
     .startButton,.easy, .normal, .hard, .playAgain,.home{
         max-width: 400px;
@@ -267,6 +286,10 @@ body{
     .text p{
         font-size: 50px;
     }
+    .container{
+        max-width: 236px;
+        max-height: 236px;
+    }
 }
 
   /*desktop*/
@@ -276,6 +299,20 @@ body{
         display: flex;
     }
     .startContainer,.selection, .game,.final{
-        max-width: 400px;
+        max-width: 375px;
+        max-height: 667px;
+    }
+    .show{
+        width: 50%;
+    }
+    .startButton, .easy, .hard,.normal{
+        max-width: 300px;
+    }
+    .pic{
+        width: 30%;
+        margin: 10px auto;
+    }
+    .text p {
+        margin-bottom: 0;
     }
 }

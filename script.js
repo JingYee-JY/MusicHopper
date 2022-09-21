@@ -1,6 +1,7 @@
 const startButton = document.querySelector(".startButton");
 const start = document.querySelector(".startContainer")
 const game = document.querySelector(".game")
+const body = document.querySelector("body")
 const selection = document.querySelector(".selection")
 const easy = document.querySelector(".easy")
 const normal = document.querySelector(".normal")
@@ -19,13 +20,22 @@ let border
 let next
 let repeat
 let moving;
+let stop;
 
 let distance
 let needleX
 let needleY
+let offsetX
+let offsetY
 let moveContainerX
 
 let player = {step: 2}
+
+Input()
+
+function Input() {
+    window.addEventListener("keydown", computerInput, {once: true})
+}
 
 startButton.addEventListener("click", () => {
     start.classList.add("hide") 
@@ -63,10 +73,13 @@ home.addEventListener("click", () => {
 })
 
 function began(){
-    startGame = true
-    jump = false
     next = 1;
     move.style.animationPlayState = "running";
+    let delay = setTimeout(() => {
+        startGame = true
+        jump = false
+        stop = false
+      }, 1000);
     spawnDisc()
 }
 
@@ -76,28 +89,29 @@ function spawnDisc() {
             let newContainer = document.createElement("div");
             newContainer.classList.add("container");
             newContainer.classList.add(`c${i}`);
-            if(border.width > 500){
+            console.log(border.width)
+            console.log(border.height)
+            if(border.width > 500 && border.width < 1900){
                 distance = 400
                 moveContainerX = 100
+                offsetX = -13
+                offsetY = 8
             }
-            else{
+            if(border.width > 360 && border.width < 380){
                 distance = 250
-                moveContainerX = 0
+                moveContainerX = 60
+                offsetX = 9
+                offsetY = 10
             }
             newContainer.y = Math.floor((border.height / 4 + border.height /2) - (distance * i));
             newContainer.x = Math.floor(Math.random() * ((border.width - 150) - moveContainerX))
             if(i == 0){
                 newContainer.x = Math.floor(border.width / 2 - 150)
-                if(border.width > 500){
-                    needleX = 130
-                    needleY = 80
-                }
-                else{
-                    needleX = 100
-                    needleY = 68
-                }
-                move.x = newContainer.x + needleX
-                move.y = newContainer.y + needleY
+                needleX = Math.floor((border.width * offsetX / 100));
+                needleY =  Math.floor((border.height * offsetY / 100));
+                console.log(needleX, needleY)
+                move.x = newContainer.x + needleX 
+                move.y = newContainer.y + needleY 
                 move.style.right = move.x  + 'px';
                 move.style.top = move.y  + 'px';
                 console.log(newContainer.x, newContainer.y)
@@ -116,6 +130,23 @@ function spawnDisc() {
         }
 }
 
+function computerInput(e){
+    if(startGame == true & stop == false){
+        switch(e.key){
+            case "ArrowUp":
+                handleInput()
+            break
+            default:
+                Input()
+            return
+        }
+        Input()
+    }
+    else{
+        Input()
+    }
+}
+
 function handleInput(){
     if(startGame == true){
         if(jump == false){
@@ -129,7 +160,7 @@ function handleInput(){
             angle = Math.round(Math.asin(values[1]) * (180/Math.PI));
             
             if(angle < 45 && angle > -90 ){
-                jump = moving = true
+                jump = moving = stop = true
                 move.style.animationPlayState = "paused";
                 console.log(next)
             }
@@ -137,7 +168,7 @@ function handleInput(){
         }
         if(jump == true){
             let nextContainer = document.querySelector(`.c${next}`)
-            if(nextContainer.x >= (move.x - 300) && nextContainer.x < (move.x + 100)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y) && moving == true){
+            if(nextContainer.x >= (move.x - 200) && nextContainer.x < (move.x + 200)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y) && moving == true){
                 console.log("stop")
                 move.style.animationPlayState = "running";
                 move.x = nextContainer.x + needleX
@@ -148,7 +179,7 @@ function handleInput(){
                 let delay = setTimeout(() => {
                     cancelAnimationFrame(repeat)
                     next += 1
-                    jump = false
+                    jump = stop = false
                     checkEnd()
                     console.log(next)
                     return
