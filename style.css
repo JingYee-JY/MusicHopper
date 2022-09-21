@@ -106,21 +106,16 @@ body{
     box-sizing: content-box;
 }
 
-.disc,
-.disc1{
+
+.disc{
+    top: 0vh;
     position: absolute;
-    max-width: 40vh;
-    height: auto;
-    top: 35vh;
+    width: 20vh;
+    height: 20vh;
     background-image: url("./img/Music\ Disc.png");
     background-repeat: no-repeat;
     background-size: contain;
     animation: spin 5s linear infinite;
-}
-.disc1{
-    top: 0vh;
-    width: 20vh;
-    height: 20vh;
 }
 
 @keyframes spin{
@@ -188,6 +183,7 @@ body{
     display: flex;
     top: 45vh;
     width: 20vh;
+    display: flex;
     height: 20vh;
     position: absolute;
     justify-content: center;
@@ -195,12 +191,12 @@ body{
 }
 .sign{
     position: relative;
-    height: 50%;
-    width: 20vh;
+    height: 65px;
+    width: 50px;
+    left: 5.5px;
     background-image: url("./img/Music Note.png");
     background-size: contain;
     background-repeat: no-repeat;
-    left: 7.2vh;
 }
 .text{
     display: flex;
@@ -232,6 +228,7 @@ body{
     .startContainer,.selection, .game,.final{
         max-width: 375px;
         max-height: 667px;
+        position: relative;
     }
     .startButton, .startGame, .playAgain, .home, .easy, .normal, .hard {
     width: calc(100% - 70px);
@@ -245,8 +242,16 @@ body{
         align-items: center;
     }
     .disc,.container{
-        max-width: 135;
-        max-height: 135;
+        max-width: 135px;
+        max-height: 135px;
+    }
+    .needle{
+        top: 45px;
+        max-width:50px;
+        max-height: 135px;
+    }
+    .move{
+        max-width: 65px;
     }
 }
 
@@ -265,6 +270,7 @@ body{
     .startContainer,.selection, .game,.final{
         max-width: 700px;
         max-height: 1020px;
+        position: relative;
     }
     .move{
         margin-top: 32px;
@@ -286,9 +292,22 @@ body{
     .text p{
         font-size: 50px;
     }
-    .container{
-        max-width: 236px;
-        max-height: 236px;
+    .disc, .container{
+        max-width: 205px;
+        max-height: 205px;
+    }
+    .needle{
+        top: 55px;
+        max-width:50px;
+        max-height: 250px;
+    }
+    .move{
+        max-width: 118px;
+    }
+    .sign{
+        height: 90px;
+        width: 90px;
+        left: 19px;
     }
 }
 

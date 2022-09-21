@@ -94,8 +94,8 @@ function spawnDisc() {
             if(border.width > 500 && border.width < 1900){
                 distance = 400
                 moveContainerX = 100
-                offsetX = -13
-                offsetY = 8
+                offsetX = -15
+                offsetY = 7
             }
             if(border.width > 360 && border.width < 380){
                 distance = 250
@@ -122,7 +122,7 @@ function spawnDisc() {
             newContainer.style.right = newContainer.x  + 'px';
             game.appendChild(newContainer)
             let newDisc = document.createElement("div");
-            newDisc.classList.add("disc1");
+            newDisc.classList.add("disc");
             newContainer.appendChild(newDisc)
             let newSign = document.createElement("div");
             newSign.classList.add("sign");
