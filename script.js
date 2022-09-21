@@ -175,6 +175,7 @@ function handleInput(){
             let style = window.getComputedStyle(move, null);
             let rotation = style.getPropertyValue("transform")
 
+            console.log(rotation)
             values = rotation.split('(')[1],
             values = values.split(')')[0],
             values = values.split(',');
@@ -197,6 +198,7 @@ function handleInput(){
                 move.y = nextContainer.y + needleY
                 move.style.right = move.x  + 'px';
                 move.style.top = move.y + 'px';
+
                 moving = false
                 let delay = setTimeout(() => {
                     cancelAnimationFrame(repeat)
