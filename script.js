@@ -27,7 +27,11 @@ let needleX
 let needleY
 let offsetX
 let offsetY
+let range
 let moveContainerX
+
+
+var values
 
 let player = {step: 2}
 
@@ -35,6 +39,10 @@ Input()
 
 function Input() {
     window.addEventListener("keydown", computerInput, {once: true})
+}
+
+function mInput() {
+    window.addEventListener("click", mobileInput, {once: true})
 }
 
 startButton.addEventListener("click", () => {
@@ -96,12 +104,16 @@ function spawnDisc() {
                 moveContainerX = 100
                 offsetX = -15
                 offsetY = 7
+                range = 129
+                player = {step: 3}
             }
             if(border.width > 360 && border.width < 380){
                 distance = 250
                 moveContainerX = 60
                 offsetX = 9
                 offsetY = 10
+                range = 90
+                player = {step: 2}
             }
             newContainer.y = Math.floor((border.height / 4 + border.height /2) - (distance * i));
             newContainer.x = Math.floor(Math.random() * ((border.width - 150) - moveContainerX))
@@ -130,7 +142,17 @@ function spawnDisc() {
         }
 }
 
-function computerInput(e){
+function mobileInput(e){
+    if(startGame == true & stop == false){
+        handleInput()
+        mInput()
+    }
+    else{
+        mInput()
+    }
+}
+
+function computerInput(){
     if(startGame == true & stop == false){
         switch(e.key){
             case "ArrowUp":
@@ -153,7 +175,7 @@ function handleInput(){
             let style = window.getComputedStyle(move, null);
             let rotation = style.getPropertyValue("transform")
 
-            var values = rotation.split('(')[1],
+            values = rotation.split('(')[1],
             values = values.split(')')[0],
             values = values.split(',');
 
@@ -168,8 +190,8 @@ function handleInput(){
         }
         if(jump == true){
             let nextContainer = document.querySelector(`.c${next}`)
-            if(nextContainer.x >= (move.x - 200) && nextContainer.x < (move.x + 200)  && nextContainer.y >= (move.y - 200) && nextContainer.y < (move.y) && moving == true){
-                console.log("stop")
+            if(nextContainer.x >= (move.x - range - needleX) && nextContainer.x < (move.x + range - needleX)  && 
+            nextContainer.y >= (move.y - range - needleY) && nextContainer.y < (move.y - needleY) && moving == true){
                 move.style.animationPlayState = "running";
                 move.x = nextContainer.x + needleX
                 move.y = nextContainer.y + needleY
@@ -183,11 +205,30 @@ function handleInput(){
                     checkEnd()
                     console.log(next)
                     return
-                  }, 1000);
+                  }, 500);
             }
             if(moving == false){
                 let allContainer = document.querySelectorAll(".container")
-            
+                
+                console.log(border.width / 4)
+                if(nextContainer.x < border.width / 4){
+                    allContainer.forEach(function(item){
+                        item.x = item.x + player.step;
+                        item.style.right = item.x +"px";
+                    })
+                    move.x = move.x+ player.step;
+                    move.style.right = move.x +"px";
+                }
+
+                if(nextContainer.x > (border.width / 4 + border / 2)){
+                    allContainer.forEach(function(item){
+                        item.x = item.x - player.step;
+                        item.style.right = item.x +"px";
+                    })
+                    move.x = move.x - player.step;
+                    move.style.right = move.x +"px";
+                }
+                
                 allContainer.forEach(function(item){
                     item.y = item.y + player.step;
                     item.style.top = item.y +"px";
@@ -197,7 +238,7 @@ function handleInput(){
                 repeat = window.requestAnimationFrame(handleInput);
                 return
             }
-            if(nextContainer.y > (border.height - 200)){
+            if(nextContainer.y > (border.height)){
                 console.log("stop")
                 game.classList.add("hide")
                 final.classList.remove("hide")

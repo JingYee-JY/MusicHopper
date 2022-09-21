@@ -324,7 +324,7 @@ body{
     .show{
         width: 50%;
     }
-    .startButton, .easy, .hard,.normal{
+    .startButton, .easy, .hard,.normal,.playAgain,.home{
         max-width: 300px;
     }
     .pic{
