@@ -40,10 +40,7 @@ let player = {step: 2}
 Input()
 
 function Input() {
-    window.addEventListener("click", mobileInput, {once: true})
-}
-
-function mInput() {
+    window.addEventListener("touchend", mobileInput, {once: true})
     window.addEventListener("click", mobileInput, {once: true})
 }
 
@@ -144,10 +141,10 @@ function spawnDisc() {
 function mobileInput(e){
     if(startGame == true & stop == false){
         handleInput()
-        mInput()
+        Input()
     }
     else{
-        mInput()
+        Input()
     }
 }
 
