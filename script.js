@@ -40,7 +40,7 @@ let player = {step: 2}
 Input()
 
 function Input() {
-    window.addEventListener("keydown", computerInput, {once: true})
+    window.addEventListener("click", mobileInput, {once: true})
 }
 
 function mInput() {
@@ -102,8 +102,6 @@ function spawnDisc() {
             let newContainer = document.createElement("div");
             newContainer.classList.add("container");
             newContainer.classList.add(`c${i}`);
-            console.log(border.width)
-            console.log(border.height)
             if(border.width > 500 && border.width < 1900){
                 distance = 400
                 moveContainerX = 100
@@ -126,14 +124,10 @@ function spawnDisc() {
                 newContainer.x = Math.floor(border.width / 2 - 150)
                 needleX = Math.floor((border.width * offsetX / 100));
                 needleY =  Math.floor((border.height * offsetY / 100));
-                console.log(needleX, needleY)
                 move.x = newContainer.x + needleX 
                 move.y = newContainer.y + needleY 
                 move.style.right = move.x  + 'px';
                 move.style.top = move.y  + 'px';
-                console.log(newContainer.x, newContainer.y)
-                console.log(move.x, move.y)
-
             }
             newContainer.style.top = newContainer.y + "px";
             newContainer.style.right = newContainer.x  + 'px';
@@ -157,42 +151,22 @@ function mobileInput(e){
     }
 }
 
-function computerInput(e){
-    if(startGame == true & stop == false){
-        switch(e.key){
-            case "ArrowUp":
-                handleInput()
-            break
-            default:
-                Input()
-            return
-        }
-        Input()
-    }
-    else{
-        Input()
-    }
-}
-
 function handleInput(){
     if(startGame == true){
         if(jump == false){
             let style = window.getComputedStyle(move, null);
             let rotation = style.getPropertyValue("transform")
 
-            console.log(rotation)
             values = rotation.split('(')[1],
             values = values.split(')')[0],
             values = values.split(',');
 
             angle = Math.round(Math.asin(values[1]) * (180/Math.PI));
-            
+            console.log(angle)
             if(angle < 45 && angle > -90 ){
                 jump = moving = stop = true
                 move.style.animationPlayState = "paused";
-                console.log(next)
             }
-            console.log(angle)
         }
         if(jump == true){
             let nextContainer = document.querySelector(`.c${next}`)
@@ -210,14 +184,12 @@ function handleInput(){
                     next += 1
                     jump = stop = false
                     checkEnd()
-                    console.log(next)
                     return
                   }, 500);
             }
             if(moving == false){
                 let allContainer = document.querySelectorAll(".container")
                 
-                console.log(border.width / 4)
                 if(nextContainer.x < border.width / 4){
                     allContainer.forEach(function(item){
                         item.x = item.x + player.step;
@@ -246,12 +218,11 @@ function handleInput(){
                 return
             }
             if(nextContainer.y > (border.height)){
-                console.log("stop")
                 game.classList.add("hide")
                 final.classList.remove("hide")
                 text.innerHTML = `
                 <img class="pic" src="./img/niceTry.png">
-                <p>Nice Try!</p>`
+                <p>Nice try!</p>`
                 cancelAnimationFrame(repeat)
                 jump = false
                 startGame = false
@@ -265,6 +236,7 @@ function handleInput(){
                     item.style.top = item.y +"px";
                 })
                 repeat = window.requestAnimationFrame(handleInput);
+                return
             }
             if(angle > -1 && angle < 45){
                 let allContainer = document.querySelectorAll(".container")
@@ -276,6 +248,7 @@ function handleInput(){
                     item.style.right = item.x +"px";
                 })
                 repeat = window.requestAnimationFrame(handleInput);
+                return
             }
             if(angle < -45 && angle > -90){
                 let allContainer = document.querySelectorAll(".container")
@@ -287,6 +260,7 @@ function handleInput(){
                     item.style.right = item.x +"px";
                 })
                 repeat = window.requestAnimationFrame(handleInput);
+                return
             }
         }
     }

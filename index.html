@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable =no">
     <title>Music Hopper</title>
     <link rel="stylesheet" 
     href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap">
@@ -40,9 +40,9 @@
         <div class="ready hide">
             <div class="pop">
                 <div class="detail">
-                    <p>Tap on the screen to let the needle move up.</p>
+                    <p>Tap on the screen to move the needle up.</p>
                     <p>Your goal is to reach the end!</p>
-                    <p>Be careful when timing your tap!</p>
+                    <p class="highlight">Be careful when timing your taps!</p>
                 </div>
                 <button class="readyButton">
                     <p class="words">I'm Ready</p>
@@ -55,7 +55,7 @@
     </div>
     <div class="final hide">
         <div class="game-title">
-            <img class="title" src="./img/title.png">
+            <img class="title endTitle" src="./img/title.png">
         </div>
         <div class="text"></div>
         <button class="playAgain">
