@@ -9,6 +9,8 @@ const hard = document.querySelector(".hard")
 const move = document.querySelector(".move")
 const final = document.querySelector(".final")
 const text = document.querySelector(".text")
+const ready = document.querySelector(".ready")
+const readyButton = document.querySelector(".readyButton")
 const playAgain = document.querySelector(".playAgain")
 const home = document.querySelector(".home")
 
@@ -54,41 +56,44 @@ easy.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
     song = 4;
-    began()
+    getReady()
 })
 normal.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
     song = 6;
-    began()
+    getReady()
 })
 hard.addEventListener("click", () => {
     selection.classList.add("hide")
     game.classList.remove("hide")
     song = 8;
-    began()
+    getReady()
 })
 playAgain.addEventListener("click", () => {
-    final.classList.add("hide")
-    game.classList.remove("hide")
-    remove()
-    began()
-})
-home.addEventListener("click", () => {
     final.classList.add("hide")
     start.classList.remove("hide")
     remove()
 })
 
+readyButton.addEventListener("click", () => {
+    ready.classList.add("hide")
+    began()
+})
+
+function getReady(){
+    move.style.animationPlayState = "running";
+    spawnDisc()
+    ready.classList.remove("hide")
+}
+
 function began(){
     next = 1;
-    move.style.animationPlayState = "running";
     let delay = setTimeout(() => {
         startGame = true
         jump = false
         stop = false
       }, 1000);
-    spawnDisc()
 }
 
 function spawnDisc() {
@@ -152,7 +157,7 @@ function mobileInput(e){
     }
 }
 
-function computerInput(){
+function computerInput(e){
     if(startGame == true & stop == false){
         switch(e.key){
             case "ArrowUp":
