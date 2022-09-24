@@ -137,11 +137,9 @@ body{
     position: absolute;
     width: 40%;
     height: 20vh;
-    top: 6.5vh;
     background-image: url("./img/Needle.png");
     background-size: contain;
     background-repeat: no-repeat;
-    transform: rotate(38deg);
 }
 .show{
     width: 70%;
@@ -296,7 +294,7 @@ body{
         max-height: 135px;
     }
     .needle{
-        top: 45px;
+        top: 65px;
         max-width:50px;
         max-height: 135px;
     }
@@ -314,9 +312,6 @@ body{
     .show{
         width: 40%;
         margin-bottom: 40px;
-    }
-    .needle{
-        margin-left: 20px;
     }
     .startContainer,.selection,.ready, .game,.final{
         max-width: 700px;
@@ -354,7 +349,7 @@ body{
         max-height: 205px;
     }
     .needle{
-        top: 55px;
+        top: 100px;
         max-width:50px;
         max-height: 250px;
     }

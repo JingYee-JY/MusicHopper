@@ -35,13 +35,12 @@ let moveContainerX
 
 var values
 
-let player = {step: 2}
+let player = {step: 2, right: 1}
 
 Input()
-
 function Input() {
-    window.addEventListener("touchend", mobileInput, {once: true})
-    window.addEventListener("click", mobileInput, {once: true})
+    document.addEventListener("touchstart", mobileInput, {once: true})
+    document.addEventListener("click", mobileInput, {once: true})
 }
 
 startButton.addEventListener("click", () => {
@@ -160,7 +159,7 @@ function handleInput(){
 
             angle = Math.round(Math.asin(values[1]) * (180/Math.PI));
             console.log(angle)
-            if(angle < 45 && angle > -90 ){
+            if(angle < 80 && angle > -80){
                 jump = moving = stop = true
                 move.style.animationPlayState = "paused";
             }
@@ -174,7 +173,6 @@ function handleInput(){
                 move.y = nextContainer.y + needleY
                 move.style.right = move.x  + 'px';
                 move.style.top = move.y + 'px';
-
                 moving = false
                 let delay = setTimeout(() => {
                     cancelAnimationFrame(repeat)
@@ -214,7 +212,7 @@ function handleInput(){
                 repeat = window.requestAnimationFrame(handleInput);
                 return
             }
-            if(nextContainer.y > (border.height)){
+            if(nextContainer.y > (border.height - 200)){
                 game.classList.add("hide")
                 final.classList.remove("hide")
                 text.innerHTML = `
@@ -225,7 +223,7 @@ function handleInput(){
                 startGame = false
                 return
             }
-            if(angle < 1 && angle > -45){
+            if(angle < 15 && angle >= -10){
                 let allContainer = document.querySelectorAll(".container")
             
                 allContainer.forEach(function(item){
@@ -235,24 +233,42 @@ function handleInput(){
                 repeat = window.requestAnimationFrame(handleInput);
                 return
             }
-            if(angle > -1 && angle < 45){
+            if(angle < 80 && angle >= 15){
+                if(angle < 80 && angle >= 45){
+                    player.right = 2
+                    console.log(player.step)
+                }
+                if(angle < 45 && angle >= 15){
+                    player.right = 1
+                    console.log(player.step)
+                }
+
                 let allContainer = document.querySelectorAll(".container")
             
                 allContainer.forEach(function(item){
                     item.y = item.y + player.step;
-                    item.x = item.x - player.step;
+                    item.x = item.x - player.right;
                     item.style.top = item.y +"px";
                     item.style.right = item.x +"px";
                 })
                 repeat = window.requestAnimationFrame(handleInput);
                 return
             }
-            if(angle < -45 && angle > -90){
+            if(angle >= -75 && angle < -10){
+                if(angle >= -40 && angle < -10){
+                    player.right = 1
+                    console.log(player.step)
+                }
+                if(angle >= -75 && angle < -40){
+                    player.right = 2
+                    console.log(player.step)
+                }
+
                 let allContainer = document.querySelectorAll(".container")
             
                 allContainer.forEach(function(item){
                     item.y = item.y + player.step;
-                    item.x = item.x + player.step;
+                    item.x = item.x + player.right;
                     item.style.top = item.y +"px";
                     item.style.right = item.x +"px";
                 })
@@ -285,3 +301,7 @@ function remove(){
         game.removeChild(item);
     })
 }
+/*prevent double tag zoom*/
+document.addEventListener('dblclick', function(event) {
+event.preventDefault();
+}, { passive: false });
