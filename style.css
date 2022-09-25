@@ -382,6 +382,9 @@ body{
     .startButton, .easy, .hard,.normal,.readyButton,.playAgain,.home{
         max-width: 250px;
     }
+    .needle{
+        top: 65px;
+    }
     .pic{
         width: 30%;
         margin: 10px auto;
