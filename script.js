@@ -12,7 +12,11 @@ const text = document.querySelector(".text")
 const ready = document.querySelector(".ready")
 const readyButton = document.querySelector(".readyButton")
 const playAgain = document.querySelector(".playAgain")
-const home = document.querySelector(".home")
+const homeButton = document.querySelector(".home")
+
+const clickSound = document.getElementById("click")
+const completed = document.getElementById("completed")
+const lose = document.getElementById("lose")
 
 let song;
 let startGame;
@@ -44,37 +48,62 @@ function Input() {
 }
 
 startButton.addEventListener("click", () => {
-    start.classList.add("hide") 
-    selection.classList.remove("hide") 
+    playClickSound()
+    let delay = setTimeout(() => {
+        start.classList.add("hide") 
+        selection.classList.remove("hide")
+    }, 200);
 })
 
 easy.addEventListener("click", () => {
-    selection.classList.add("hide")
-    game.classList.remove("hide")
-    song = 4;
-    getReady()
+    playClickSound()
+    let delay = setTimeout(() => {
+        selection.classList.add("hide")
+        game.classList.remove("hide")
+        song = 4;
+        getReady()
+    }, 200);
 })
 normal.addEventListener("click", () => {
-    selection.classList.add("hide")
-    game.classList.remove("hide")
-    song = 6;
-    getReady()
+    playClickSound()
+    let delay = setTimeout(() => {
+        selection.classList.add("hide")
+        game.classList.remove("hide")
+        song = 6;
+        getReady()
+    }, 200);
 })
 hard.addEventListener("click", () => {
-    selection.classList.add("hide")
-    game.classList.remove("hide")
-    song = 8;
-    getReady()
+    playClickSound()
+    let delay = setTimeout(() => {
+        selection.classList.add("hide")
+        game.classList.remove("hide")
+        song = 8;
+        getReady()
+    }, 200);
 })
 playAgain.addEventListener("click", () => {
-    final.classList.add("hide")
-    start.classList.remove("hide")
-    remove()
+    playClickSound()
+    let delay = setTimeout(() => {
+        final.classList.add("hide")
+        start.classList.remove("hide")
+        remove()
+    }, 200);
 })
 
 readyButton.addEventListener("click", () => {
-    ready.classList.add("hide")
-    began()
+    playClickSound()
+    let delay = setTimeout(() => {
+        ready.classList.add("hide")
+        began()
+    }, 200);
+})
+
+homeButton.addEventListener("click", () => {
+    playClickSound()
+    let delay = setTimeout(() => {
+      location.assign('https://gimme.sg/activations/dementia/');
+    }, 200);
 })
 
 function getReady(){
@@ -160,6 +189,7 @@ function handleInput(){
             angle = Math.round(Math.asin(values[1]) * (180/Math.PI));
             console.log(angle)
             if(angle < 80 && angle > -80){
+                playClickSound()
                 jump = moving = stop = true
                 move.style.animationPlayState = "paused";
             }
@@ -213,6 +243,8 @@ function handleInput(){
                 return
             }
             if(nextContainer.y > (border.height - 200)){
+                lose.currentTime = 0
+                lose.play()
                 game.classList.add("hide")
                 final.classList.remove("hide")
                 text.innerHTML = `
@@ -282,6 +314,8 @@ function handleInput(){
 function checkEnd(){
     if(next == song){
         let delay = setTimeout(() => {
+            completed.currentTime = 0
+            completed.play()
             game.classList.add("hide")
             final.classList.remove("hide")
             text.innerHTML = `
@@ -301,6 +335,13 @@ function remove(){
         game.removeChild(item);
     })
 }
+
+function playClickSound(){
+    console.log(clickSound)
+    clickSound.currentTime = 0
+    clickSound.play()
+}
+
 /*prevent double tag zoom*/
 document.addEventListener('dblclick', function(event) {
 event.preventDefault();

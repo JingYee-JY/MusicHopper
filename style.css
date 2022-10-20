@@ -35,6 +35,28 @@ body{
     box-shadow: 0px 8px #F46255;
 }
 
+.startButton:active,.startGame:active,.readyButton:active,.easy:active,.normal:active,.hard:active,.restart:active,.home:active{
+    animation: animate 0.2s;
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg) translateX(0px);
+    }
+    25%{
+        transform: rotate(-20deg) translateX(-10px);
+    }
+    50%{
+        transform: rotate(0deg) translateX(0px);
+    }
+    75%{
+        transform: rotate(20deg) translateX(10px);
+    }
+    100%{
+        transform: rotate(0deg) translateX(0px);
+    }
+}
+
 .words{
     font-size: 20px;
     width: 100%;
